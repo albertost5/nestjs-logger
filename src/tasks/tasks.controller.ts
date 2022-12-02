@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TasksService } from './tasks.service';
 
@@ -6,16 +6,29 @@ import { TasksService } from './tasks.service';
 export class TasksController {
     
     constructor(
-        private readonly tasksService: TasksService
-    ) {}
-
+        private readonly tasksService: TasksService,
+        private readonly logger: Logger
+    ) {
+        this.logger.log(`${TasksController.name + ' ready!'}`, `${TasksController.name}`);
+    }
+    
+        
     @Get()
     find() {
-        return this.tasksService.find();
+        this.logger.log(`Called ${this.find.name}`, TasksController.name);
+        try {
+            return this.tasksService.find();
+        } catch (error) {
+            throw error;
+        }
     }
 
     @Post()
     create(@Body() createTaskDto: CreateTaskDto) {
-        return this.tasksService.create(createTaskDto);
+        try {
+            return this.tasksService.create(createTaskDto);
+        } catch (error) {
+            throw error;
+        }
     }
 }

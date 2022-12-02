@@ -1,15 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
 
     find() {
-        return 'All tasks';
+        throw new BadRequestException('badrequest');
     }
 
     create(createTaskDto: CreateTaskDto) {
-        return 'New task created';
+        throw new NotFoundException('notfound');
     }
 
 }
