@@ -25,6 +25,7 @@ export class TasksController {
 
     @Post()
     create(@Body() createTaskDto: CreateTaskDto) {
+        this.logger.log(`Called ${this.create.name}`, TasksController.name);
         try {
             return this.tasksService.create(createTaskDto);
         } catch (error) {

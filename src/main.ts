@@ -14,8 +14,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
       transports: [
-        // new winston.transports.Http({
-        // }),
         new winston.transports.Console({
           /**
            * level: ascending from most important to least important
@@ -36,7 +34,16 @@ async function bootstrap() {
           ),
         }),
         // Transport to write logs in a file => ENV FILE
-        new winston.transports.File({ filename: 'logs/combined.log' })
+        new winston.transports.File({ 
+          filename: 'logs/combined.log',
+          // To write timestamps in logs saved file
+          format: winston.format.combine(
+            winston.format.timestamp({
+              format: "YYYY-MM-DD HH:mm:ss",
+            }),
+            winston.format.json()
+          )
+        })
       ],
     }),
   });
