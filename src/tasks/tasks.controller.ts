@@ -4,32 +4,33 @@ import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
-    
-    constructor(
-        private readonly tasksService: TasksService,
-        private readonly logger: Logger
-    ) {
-        this.logger.log(`${TasksController.name + ' ready!'}`, `${TasksController.name}`);
-    }
-    
-        
-    @Get()
-    find() {
-        this.logger.log(`Called ${this.find.name}`, TasksController.name);
-        try {
-            return this.tasksService.find();
-        } catch (error) {
-            throw error;
-        }
-    }
+  constructor(
+    private readonly tasksService: TasksService,
+    private readonly logger: Logger,
+  ) {
+    this.logger.log(
+      `${TasksController.name + ' ready!'}`,
+      `${TasksController.name}`,
+    );
+  }
 
-    @Post()
-    create(@Body() createTaskDto: CreateTaskDto) {
-        this.logger.log(`Called ${this.create.name}`, TasksController.name);
-        try {
-            return this.tasksService.create(createTaskDto);
-        } catch (error) {
-            throw error;
-        }
+  @Get()
+  find() {
+    this.logger.log(`Called ${this.find.name}`, TasksController.name);
+    try {
+      return this.tasksService.find();
+    } catch (error) {
+      throw error;
     }
+  }
+
+  @Post()
+  create(@Body() createTaskDto: CreateTaskDto) {
+    this.logger.log(`Called ${this.create.name}`, TasksController.name);
+    try {
+      return this.tasksService.create(createTaskDto);
+    } catch (error) {
+      throw error;
+    }
+  }
 }

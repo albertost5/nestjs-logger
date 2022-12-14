@@ -10,14 +10,11 @@ import { TasksModule } from './tasks/tasks.module';
     TasksModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
-      isGlobal: true
+      isGlobal: true,
     }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    Logger,
-  ],
+  providers: [AppService, Logger],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {

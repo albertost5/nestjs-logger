@@ -1,4 +1,9 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
+import {
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  HttpException,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { exceptionTitle } from './constant.filter';
 
@@ -11,16 +16,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     // exception
-        // response: { statusCode: 404, message: 'Cannot GET /cats', error: 'Not Found' },
-        // status: 404,
-        // options: {}
-    
-    response
-      .status(status)
-      .json({
-        statusCode: status,
-        title: exceptionTitle[status],
-        message: (exception.getResponse() as any).message
-      });
+    // response: { statusCode: 404, message: 'Cannot GET /cats', error: 'Not Found' },
+    // status: 404,
+    // options: {}
+
+    response.status(status).json({
+      statusCode: status,
+      title: exceptionTitle[status],
+      message: (exception.getResponse() as any).message,
+    });
   }
 }
